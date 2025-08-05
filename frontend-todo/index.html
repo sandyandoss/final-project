@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ToDo App</title>
+  
+    <link rel="stylesheet" href="style.css">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!--  toggle button day and night -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-inner">
+            <span class="theme-icon sun">☀️</span>
+            <span class="theme-icon moon">🌙</span>
+        </div>
+    </div>
+
+    <!-- Main container  -->
+     
+    <div class="container">
+        <!-- Stats section showing progress -->
+        <div class="stats-container">
+            <div class="details">
+                <h1>Today's Focus</h1>
+                <p>Every task completed is a win ✨</p>
+                <!-- Progress bar  -->
+                <div id="progressBar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+            <!-- tp see completed/total tasks -->
+            <div class="stats-numbers">
+                <p id="numbers">0 / 0</p>
+            </div>
+        </div>
+
+        <!-- Form to add new tasks -->
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="What's on your mind today?" required>
+            <button type="submit">+</button>
+        </form>
+
+        <!-- List where all tasks will appear -->
+        <ul class="task-list" id="taskList"></ul>
+    </div>
+
     
+    <script src="script.js"></script>
 </body>
 </html>

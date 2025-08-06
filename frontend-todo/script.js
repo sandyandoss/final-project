@@ -140,5 +140,5 @@ function initializeApp() {
     }, 1000);
 }
 
-// / Run when page loads
+// Run when page loads
 document.addEventListener('DOMContentLoaded', initializeApp);

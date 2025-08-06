@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-$mysqli = new mysqli("localhost", "root", "Luckytobeyoung1!", "blog_api");
+$mysqli = new mysqli("localhost", "root", "", "blog_api");
 
 if ($mysqli->connect_error) {
     http_response_code(500);

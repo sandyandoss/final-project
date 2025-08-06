@@ -1,4 +1,4 @@
-# 🧁✨ Final Project — Sweet & Simple To-Do + Blog API 🍭🎀
+# 🧁✨ Final Project — Sweet & Simple To-Do + Blog API 
 
 
 ## 💡 Features
@@ -10,7 +10,7 @@
 
 ## 🌈 Screenshots
 
-### 🌚 Dark Mode 
+### 🌙 Dark Mode 
 ![Dark](frontend.png)
 
 ### ☀️ Light Mode 

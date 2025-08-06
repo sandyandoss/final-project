@@ -1,5 +1,5 @@
 <?php
-// NOTE: Default MySQL password is blank. Change if needed for your setup.
+// NOTE: Default MySQL password is blank. Change if needed for your setup
 
 
 header("Content-Type: application/json");

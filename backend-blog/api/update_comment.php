@@ -1,31 +1,25 @@
 <?php
-header("Content-Type: application/json");
+require '../connection.php';
+header('Content-Type: application/json');
 
-$mysqli = new mysqli("localhost", "root", "", "blog_api");
-
-if ($mysqli->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "DB connection failed"]);
+if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Invalid method']);
     exit;
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
+$commentId = $data['id'] ?? null;
+$content = $data['content'] ?? null;
 
-if (!isset($data["comment_id"]) || !isset($data["content"])) {
+if (!$commentId || !$content) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing comment_id or content"]);
+    echo json_encode(['error' => 'Missing comment ID or content']);
     exit;
 }
 
-$comment_id = intval($data["comment_id"]);
-$content = $mysqli->real_escape_string($data["content"]);
+$sql = "UPDATE comments SET content = ? WHERE id = ?";
+$stmt = $pdo->prepare($sql);
+$success = $stmt->execute([$content, $commentId]);
 
-$sql = "UPDATE comments SET content = '$content' WHERE id = $comment_id";
-
-if ($mysqli->query($sql)) {
-    echo json_encode(["message" => "Comment updated successfully"]);
-} else {
-    http_response_code(500);
-    echo json_encode(["error" => "Update failed"]);
-}
-?>
+echo json_encode(['updated' => $success]);

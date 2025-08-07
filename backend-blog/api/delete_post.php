@@ -1,34 +1,27 @@
 <?php
-// NOTE: Default MySQL password is blank. Change if needed for your setup
+require '../connection.php';
+header('Content-Type: application/json');
 
-
-header("Content-Type: application/json");
-
-$mysqli = new mysqli("localhost", "root", "", "blog_api");
-
-if ($mysqli->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "DB connection failed"]);
+if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Invalid method']);
     exit;
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
+$postId = $data['id'] ?? null;
 
-if (!isset($data["post_id"])) {
+if (!$postId) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing post_id"]);
+    echo json_encode(['error' => 'Missing post ID']);
     exit;
 }
 
-$post_id = intval($data["post_id"]);
+// First delete comments on that post
+$pdo->prepare("DELETE FROM comments WHERE post_id = ?")->execute([$postId]);
 
-// Delete post
-$sql = "DELETE FROM posts WHERE id = $post_id";
+// Then delete the post
+$stmt = $pdo->prepare("DELETE FROM posts WHERE id = ?");
+$success = $stmt->execute([$postId]);
 
-if ($mysqli->query($sql)) {
-    echo json_encode(["message" => "Post deleted successfully"]);
-} else {
-    http_response_code(500);
-    echo json_encode(["error" => "Deletion failed"]);
-}
-?>
+echo json_encode(['deleted' => $success]);

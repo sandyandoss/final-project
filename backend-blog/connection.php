@@ -4,7 +4,7 @@
 $host = 'localhost';
 $dbname = 'blog_api';
 $username = 'root';
-$password = 'Luckytobeyoung1!';
+$password = 'yoyr_password';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);

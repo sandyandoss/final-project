@@ -41,4 +41,4 @@
 1. Install [XAMPP](https://www.apachefriends.org/index.html)
 2. Import `db.sql` into your MySQL server
 3. Place `final-project` inside `htdocs`
-4. Update `db.php` if you use a password
+4. Update `connection.php` if you use a password
